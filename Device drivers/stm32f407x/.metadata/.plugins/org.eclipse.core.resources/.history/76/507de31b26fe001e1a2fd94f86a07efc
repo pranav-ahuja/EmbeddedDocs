@@ -1,0 +1,109 @@
+/*
+ * stm32f407xx_usart_driver.c
+ *
+ *  Created on: Apr 16, 2024
+ *      Author: Rakesh Ahuja
+ */
+
+#include "stm32f407xx_usart_driver.h"
+
+void USART_ClockPeripheral(USART_RegDef_t *pUSARTx, uint8_t EnorDi)
+{
+	if(EnorDi == ENABLE)
+	{
+		if(pUSARTx == USART1)
+			USART1_PCLK_EN();
+		else if(pUSARTx == USART2)
+			USART2_PCLK_EN();
+		else if(pUSARTx == USART3)
+			USART3_PCLK_EN();
+		else if(pUSARTx == USART6)
+			USART6_PCLK_EN();
+		else if(pUSARTx == UART4)
+			UART4_PCLK_EN();
+		else if(pUSARTx == UART5)
+			UART5_PCLK_EN();
+	}
+	else if(EnorDi == DISABLE)
+	{
+		if(pUSARTx == USART1)
+			USART1_PCLK_DI();
+		else if(pUSARTx == USART2)
+			USART2_PCLK_DI();
+		else if(pUSARTx == USART3)
+			USART3_PCLK_DI();
+		else if(pUSARTx == USART6)
+			USART6_PCLK_DI();
+		else if(pUSARTx == UART4)
+			UART4_PCLK_DI();
+		else if(pUSARTx == UART5)
+			UART5_PCLK_DI();
+	}
+}
+
+void USART_Init(USART_Handle_t *pUSARTHandle)
+{
+	uint16_t tempReg_cr1, tempReg_cr2, tempReg_cr3;
+
+	//1) Select Word length	-	CR1
+	(pUSARTHandle->pUSARTConfig.USART_WordLength == USART_WORD_8_BIT_DATA)?tempReg_cr1 &= ~(1 << USART_CR1_M):tempReg_cr1 |= (1 << USART_CR1_M);
+
+	//2) Select the mode of transmission -	CR1
+	if(pUSARTHandle->pUSARTConfig->USART_Modes == USART_FULL_DUPLEX)
+	{
+		tempReg_cr1 |= (1 << USART_CR1_TE);
+		tempReg_cr1 |= (1 << USART_CR1_RE);
+	}
+	else if(pUSARTHandle->pUSARTConfig->USART_Modes == USART_HALF_DUPLEX)
+	{
+		tempReg_cr3 |= (1 << USART_CR3_HDSEL);
+	}
+	else if(pUSARTHandle->pUSARTConfig->USART_Modes == USART_SIMPLEX_RX)
+	{
+		tempReg_cr1 |= (1 << USART_CR1_RE);
+	}
+	else if(pUSARTHandle->pUSARTConfig->USART_Modes == USART_SIMPLEX_TX)
+	{
+		tempReg_cr1 |= (1 << USART_CR1_TE);
+	}
+
+	//4) Select the number of stop bits	-	CR2
+	tempReg_cr2 |= (pUSARTHandle->pUSARTConfig->USART_STOPBits << USART_CR2_STOP);
+
+	//5) Select the sampling method	-	CR3
+	tempReg_cr3 |= (pUSARTHandle->pUSARTConfig->USART_OverSamplngMethod << USART_CR3_ONEBIT);
+
+	//6) Select the over sampling rate	-	CR1
+	tempReg_cr3 |= (pUSARTHandle->pUSARTConfig->USART_OversamplingRate << USART_CR1_OVER8);
+
+	//7) Enable the clock if it is USART -	CR2
+	tempReg_cr3 |= (pUSARTHandle->pUSARTConfig->USART_ClkEnable << USART_CR2_CLKEN);
+
+	//8) Select CPOL and CPHA -	CR2
+	tempReg_cr2 |= (pUSARTHandle->pUSARTConfig->USART_Cpol << USART_CR2_CPOL);
+	tempReg_cr2 |= (pUSARTHandle->pUSARTConfig->USART_Cpha << USART_CR2_CPHA);
+
+	//9) Select the baud rate -	CR2
+}
+
+void USART_DeInit(USART_RegDef_t *pUSARTx)
+{
+	if(pUSARTx == USART1)
+		USART1_RESET();
+	else if(pUSARTx == USART2)
+		USART2_RESET();
+	else if(pUSARTx == USART2)
+		USART3_RESET();
+	else if(pUSARTx == USART2)
+		USART6_RESET();
+	else if(pUSARTx == UART4)
+		UART4_RESET();
+	else if(pUSARTx == UART5)
+		UART5_RESET();
+}
+
+
+void USART_SendData();
+uint8_t USART_ReceiveData();
+
+

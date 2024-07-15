@@ -1,0 +1,10 @@
+11:41:04 **** Incremental Build of configuration Debug for project STM32F407_Device_Drivers ****
+make -j20 all 
+arm-none-eabi-size  STM32F407_Device_Drivers.elf 
+   text	   data	    bss	    dec	    hex	filename
+    652	      8	   1568	   2228	    8b4	STM32F407_Device_Drivers.elf
+Finished building: default.size.stdout
+ 
+
+11:41:05 Build Finished. 0 errors, 0 warnings. (took 454ms)
+

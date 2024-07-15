@@ -1,0 +1,104 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2024 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+RCC_OscInitTypeDef clk_osc;
+RCC_ClkInitTypeDef clk_cfg;
+
+int main(void)
+{
+  HAL_Init();
+
+  SystemClock_Config();
+
+  MX_USB_HOST_Init();
+
+  HAL_RCC_Init();
+
+  HAL_RCC_config();
+
+  //Shutting down the HSI clock to save some current
+  __HAL_RCC_HSI_DISABLE();
+
+  //Printing the clock values
+  sprintf(msg, "SYSCLK Confis: \n\r", HAL_RCC_GetClockConfig(&clk_cfg, 0));
+
+
+
+  while (1)
+  {
+    MX_USB_HOST_Process();
+  }
+}
+
+void HAL_RCC_Init()
+{
+	memset(&clk_osc, 0, sizeof(clk_osc));	//Resetting the values
+
+	//HSE External clock
+	clk_osc.HSEState = RCC_HSE_ON;
+	clk_osc.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+
+	if(HAL_RCC_OscConfig(&clk_osc) != HAL_OK)
+	{
+		Error_Handler();
+	}
+
+}
+
+void HAL_RCC_config()
+{
+	clk_cfg.SYSCLKSource = RCC_SYSCLKSOURCE_HSE;
+	clk_cfg.ClockType = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+	clk_cfg.AHBCLKDivider = RCC_SYSCLK_DIV2;
+	clk_cfg.APB1CLKDivider = RCC_HCLK_DIV2;
+	clk_cfg.APB2CLKDivider = RCC_HCLK_DIV2;
+
+	if(HAL_RCC_ClockConfig(&clk_cfg, FLASH_ACR_LATENCY_0WS) != HAL_OK)	//Flash Latency is 0 depending on the reference manual
+	{
+		Error_Handler();
+	}
+}
+
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  __disable_irq();
+  while (1)
+  {
+
+  }
+  /* USER CODE END Error_Handler_Debug */
+}
+

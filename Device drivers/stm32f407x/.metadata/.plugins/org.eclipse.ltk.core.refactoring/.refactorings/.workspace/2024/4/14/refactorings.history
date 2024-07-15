@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;STM32F407_Device_Drivers/drivers/src/stm32f407xx_rcc_driver.h&apos;" deleteContents="false" description="Delete resource &apos;STM32F407_Device_Drivers/drivers/src/stm32f407xx_rcc_driver.h&apos;" element1="/STM32F407_Device_Drivers/drivers/src/stm32f407xx_rcc_driver.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1711985715117"/>
+</session>

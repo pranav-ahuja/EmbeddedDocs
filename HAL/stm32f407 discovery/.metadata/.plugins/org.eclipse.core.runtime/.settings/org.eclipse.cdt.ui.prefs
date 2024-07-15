@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+org.eclipse.cdt.ui.text.templates.custom=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="true" context\="org.eclipse.cdt.ui.text.templates.c" deleted\="false" description\="Surround with while(1)" enabled\="true" name\="while(1)">while(1)&\#13;\r\n{&\#13;\r\n\t${line_selection}${cursor}&\#13;\r\n}</template></templates>
+org.eclipse.cdt.ui.text.templates.format=true
+scalability.detect=false
+spelling_locale_initialized=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

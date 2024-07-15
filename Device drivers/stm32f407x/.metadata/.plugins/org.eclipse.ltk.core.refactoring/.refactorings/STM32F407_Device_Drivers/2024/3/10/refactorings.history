@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;STM32F407_Device_Drivers/Src/SPI_stf4_ardun3_comm.c&apos; to &apos;005SPI_stf4_ardun3_comm.c&apos;" description="Rename resource &apos;SPI_stf4_ardun3_comm.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/SPI_stf4_ardun3_comm.c" name="005SPI_stf4_ardun3_comm.c" stamp="1709751230023" updateReferences="true"/>
+</session>

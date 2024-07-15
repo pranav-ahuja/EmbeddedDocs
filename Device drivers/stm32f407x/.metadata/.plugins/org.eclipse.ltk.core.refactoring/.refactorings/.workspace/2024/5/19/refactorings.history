@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;UART_HAL_HelloWorld&apos;" deleteContents="false" description="Delete resource &apos;UART_HAL_HelloWorld&apos;" element1="/UART_HAL_HelloWorld" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1715337611278"/>&#x0A;<refactoring comment="Delete resource &apos;BluePill_UART_HelloWorld&apos;" deleteContents="true" description="Delete resource &apos;BluePill_UART_HelloWorld&apos;" element1="/BluePill_UART_HelloWorld" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1715337618189"/>
+</session>
